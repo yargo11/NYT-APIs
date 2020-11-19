@@ -1,5 +1,5 @@
-import React, { useState, FormEvent, useEffect } from 'react';
-import api from '../../services/api';
+import React, { useState, useEffect } from 'react';
+import { api } from '../../services/api';
 import logoImg from '../../assets/tjrn.png';
 
 import { Title, Header, Body, Form, Books, Copyright } from './styles';
@@ -11,9 +11,7 @@ interface Livro {
   updated: string;
 }
 interface Books {
-  results: {
-    list_name_encoded: string;
-  };
+  results: number;
   livro: Livro;
 }
 const Dashboard: React.FC = () => {
@@ -40,8 +38,6 @@ const Dashboard: React.FC = () => {
 
     setBooks([response.data]);
   };
-
-  console.log(books);
 
   return (
     <>
@@ -71,11 +67,11 @@ const Dashboard: React.FC = () => {
         <hr />
         <Books>
           {books.map(book => (
-            <a key={book.results.list_name_encoded} href="teste">
-              <div>
+            <a key={book.results} href="teste">
+              {/* <div>
                 <strong>{book.livro.display_name}</strong>
                 <p>
-                  <small>{book.results.list_name_encoded}</small>
+                  <small>{book.livro.display_name}</small>
                 </p>
               </div>
               <div>
@@ -91,7 +87,7 @@ const Dashboard: React.FC = () => {
               <p>
                 Updated:
                 {book.livro.updated}
-              </p>
+              </p> */}
             </a>
           ))}
         </Books>
