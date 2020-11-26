@@ -41,7 +41,7 @@ export const Copyright = styled.div`
   margin: auto;
   margin-top: 20px;
   margin-bottom: 5px;
-  color: #fffafa;
+  color: darkgray;
 
   display: flex;
   place-content: space-between;

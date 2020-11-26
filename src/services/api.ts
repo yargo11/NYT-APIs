@@ -11,4 +11,9 @@ export const api2 = axios.create({
 export const api3 = axios.create({
   baseURL: 'https://cat-fact.herokuapp.com/',
 });
+
+export const api4 = axios.create({
+  baseURL:
+    'http://gpsjus.homologacao.intrajus.tjrn/1grau_produtividade_teletrabalho.php',
+});
 // export default api;

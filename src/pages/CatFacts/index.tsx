@@ -4,38 +4,24 @@ import { api3 } from '../../services/api';
 
 import { Title, Header, Body, Form, Copyright } from './styles';
 
-interface Cats {
+interface Fact {
   _id: string;
+  _v: Number;
   text: string;
-  user: {
-    name: {
-      first: string;
-      last: string;
-    };
-  };
-  upvotes: number;
 }
 
 const CatFacts: React.FC = () => {
-  // const [searchBook, setSearchBook] = useState('');
-  const [cats, setCats] = useState<Cats[]>([]);
+  const [cats, setCats] = useState<Fact[]>([]);
 
   useEffect(() => {
     loadCats();
   }, []);
 
   const loadCats = async () => {
-    const response = await api3.get('facts');
+    const response = await api3.get('/facts');
 
     setCats(response.data);
   };
-  let chave = [''];
-  let valor = [''];
-  const myNewArray = Object.entries(cats).forEach(([key, value]) => {
-    [chave, valor] = [key, value];
-    console.log(key);
-    console.log(value);
-  });
 
   console.log('eu estou aqui');
   console.log(typeof cats);
@@ -66,8 +52,8 @@ const CatFacts: React.FC = () => {
             cat facts.
           </strong>
         </Copyright>
-        {/* {myNewArray.map(facts => (
-          <div key={facts.upvotes}>{facts.text}</div>
+        {/* {cats.map(gatos => (
+          <div>{gatos.text}</div>
         ))} */}
         <hr />
       </Body>
