@@ -23,7 +23,7 @@ export const Header = styled.div`
 export const Body = styled.div`
   max-width: 960px;
   margin: auto;
-
+  background: lightgray;
   hr {
     margin-bottom: 20px;
   }
@@ -41,7 +41,7 @@ export const Copyright = styled.div`
   margin: auto;
   margin-top: 20px;
   margin-bottom: 5px;
-  color: #fffafa;
+  color: darkgray;
 
   display: flex;
   place-content: space-between;
@@ -50,11 +50,22 @@ export const Copyright = styled.div`
 export const Form = styled.form`
   margin-top: 70px;
   margin-bottom: 50px;
-  /* max-width: 60px; */
+  max-width: 960px;
+  box-shadow: 5px 5px 10px black;
 
   display: flex;
-  justify-content:center;
 
+  input {
+    padding: 10px;
+    flex: 1;
+    height: 50px;
+    border: 0;
+    border-radius: 5px 0 0 5px;
+    color: #3a3a3a;
+
+    &::placeholder {
+      color: #a8a8b3;
+    }
   }
 
   button {
@@ -62,9 +73,7 @@ export const Form = styled.form`
     height: 50px;
     background: #04d361;
     border: 0;
-    box-shadow: 5px 5px 10px black;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 0 5px 5px 0;
     color: #fff;
     font-weight: bold;
     transition: background-color 0.2s;

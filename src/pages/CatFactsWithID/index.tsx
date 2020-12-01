@@ -10,29 +10,37 @@ interface Fact {
   text: string;
 }
 
-const CatFacts: React.FC = () => {
-  const [cats, setCats] = useState<Fact[]>([]);
+const CatFactsWithID: React.FC = () => {
+  const [cats, setCats] = useState<Fact>({
+    _id: '',
+    _v: 0,
+    text: '',
+  });
 
   useEffect(() => {
     loadCats();
   }, []);
 
   const loadCats = async () => {
-    const response = await api3.get('/facts');
+    const response = await api3.get('/facts/5a4aab132c99ee00219e11c2');
 
     setCats(response.data);
   };
 
-  console.log('eu estou aqui');
-  console.log(typeof cats);
-  console.log(cats);
+  const factText = (gatinhos: Fact) => {
+    return gatinhos.text;
+  };
+
+  const factID = (gatinhos: Fact) => {
+    return ` ${gatinhos._id}`;
+  };
 
   return (
     <>
       <Header>
         <div>
           <img src={logoImg} alt="TJRN" />
-          <Title>CatFacts - SETIC</Title>
+          <Title>Cat Facts With ID</Title>
         </div>
       </Header>
       <Body>
@@ -52,13 +60,19 @@ const CatFacts: React.FC = () => {
             cat facts.
           </strong>
         </Copyright>
-        {/* {cats.map(gatos => (
-          <div>{gatos.text}</div>
-        ))} */}
+        <p>
+          Fact:
+          {factText(cats)}
+        </p>
+        <br />
+        <p>
+          ID:
+          {factID(cats)}
+        </p>
         <hr />
       </Body>
     </>
   );
 };
 
-export default CatFacts;
+export default CatFactsWithID;
