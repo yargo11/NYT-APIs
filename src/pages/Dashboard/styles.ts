@@ -3,7 +3,7 @@ import { shade } from 'polished';
 
 export const Header = styled.div`
   width: 100%;
-  background: #fff;
+  background: #d3d3d3;
   height: 150px;
   display: flex;
   align-items: center;
@@ -16,6 +16,8 @@ export const Header = styled.div`
     img {
       float: left;
       margin-right: 25px;
+      border-radius: 50%;
+      margin-top: 10px;
     }
   }
 `;
@@ -41,7 +43,7 @@ export const Copyright = styled.div`
   margin: auto;
   margin-top: 20px;
   margin-bottom: 5px;
-  color: #fffafa;
+  /* color: #fffafa; */
 
   display: flex;
   place-content: space-between;
@@ -108,5 +110,21 @@ export const Books = styled.div`
     & + a {
       margin-top: 20px;
     }
+  }
+`;
+
+export const CatFact = styled.div`
+  max-width: 960px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #d3d3d3;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+
+  p {
+    text-align: center;
   }
 `;

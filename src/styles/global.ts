@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import tomtom1 from '../assets/tomtom1.jpg';
 
 export default createGlobalStyle`
 *{
@@ -9,7 +10,10 @@ box-sizing:border-box;
 }
 
 body{
-  background:#2A2A01;
+  /* background:#fff; */
+  background-image:url(${tomtom1});
+  background-repeat: no-repeat;
+  background-size: 100%;
   -webkit-font-smoothing: antialiased;
 }
 

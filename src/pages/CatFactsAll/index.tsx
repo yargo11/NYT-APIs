@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import logoImg from '../../assets/tjrn.png';
 import { api3 } from '../../services/api';
+import CatIcon from '../../assets/CatIcon.png';
 
 import { Title, Header, Body, Form, Copyright } from './styles';
 
@@ -12,6 +12,7 @@ interface Fact {
 
 const CatFactsAll: React.FC = () => {
   const [cats, setCats] = useState<Fact[]>([]);
+  const allCatsId = [''];
 
   useEffect(() => {
     loadCats();
@@ -23,23 +24,15 @@ const CatFactsAll: React.FC = () => {
     setCats(response.data.all);
   };
 
-  // function greet(gatinhos: Fact) {
-  //   return `Fact: ${gatinhos.text}, ID ${gatinhos._id}`;
-  // }
+  cats.map(gatos => allCatsId.push(gatos._id));
 
-  // const allFacts = Object.entries(cats);
-
-  // console.log('dot');
-  // console.log(cats);
-  // // console.log(typeof cats);
-  // console.log(allFacts);
-  // console.log('dot');
+  // console.log(allCatsId);
 
   return (
     <>
       <Header>
         <div>
-          <img src={logoImg} alt="TJRN" />
+          <img src={CatIcon} alt="TJRN" />
           <Title>Cat Facts All</Title>
         </div>
       </Header>
@@ -62,7 +55,7 @@ const CatFactsAll: React.FC = () => {
         </Copyright>
         {cats.map(gatos => (
           <div key={gatos._id}>
-            <p>{gatos.text}</p>
+            <p>{gatos._id}</p>
             <br />
           </div>
         ))}
