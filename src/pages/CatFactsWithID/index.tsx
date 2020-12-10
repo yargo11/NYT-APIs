@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import logoImg from '../../assets/tjrn.png';
+import { useHistory } from 'react-router-dom';
 import { api3 } from '../../services/api';
+import tomtom3 from '../../assets/tomtom3.png';
 
-import { Title, Header, Body, Form, Copyright } from './styles';
+import { Title, Header, Body, Form } from './styles';
 
 interface Fact {
   _id: string;
-  _v: Number;
+  createdAt: string;
+  updatedAt: string;
+  user: string;
   text: string;
 }
 
 const CatFactsWithID: React.FC = () => {
   const [cats, setCats] = useState<Fact>({
     _id: '',
-    _v: 0,
+    createdAt: '',
+    updatedAt: '',
+    user: '',
     text: '',
   });
 
@@ -21,53 +26,57 @@ const CatFactsWithID: React.FC = () => {
     loadCats();
   }, []);
 
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const id = urlParams.get('id');
+
   const loadCats = async () => {
-    const response = await api3.get('/facts/5a4aab132c99ee00219e11c2');
+    const response = await api3.get(`/facts/${id}`);
 
     setCats(response.data);
   };
 
-  const factText = (gatinhos: Fact) => {
-    return gatinhos.text;
-  };
+  const { text, _id, createdAt, updatedAt, user } = cats;
 
-  const factID = (gatinhos: Fact) => {
-    return ` ${gatinhos._id}`;
-  };
+  const history = useHistory();
+
+  function handleClick() {
+    history.push('/');
+  }
 
   return (
     <>
       <Header>
         <div>
-          <img src={logoImg} alt="TJRN" />
-          <Title>Cat Facts With ID</Title>
+          <img src={tomtom3} alt="TJRN" />
+          <Title>Random Cat Facts - Meow!</Title>
         </div>
       </Header>
       <Body>
-        {/* <Form onSubmit={handleSearchBook}> */}
         <Form>
-          <input
-            // value={searchBook}
-            // onChange={e => setSearchBook(e.target.value)}
-            placeholder="Pesquise aqui pelo livro"
-          />
-          <button type="submit">Pesquisar</button>
+          <button type="button" onClick={handleClick}>
+            Voltar
+          </button>
         </Form>
-        <Copyright>
-          <strong>
-            Using a combination of Node.js, Angular, and Tasker, this app will
-            combine APIs and Services from the web to do just one thing… send
-            cat facts.
-          </strong>
-        </Copyright>
         <p>
-          Fact:
-          {factText(cats)}
+          <strong>Fact: </strong>
+          {text}
         </p>
-        <br />
         <p>
-          ID:
-          {factID(cats)}
+          <strong>ID: </strong>
+          {_id}
+        </p>
+        <p>
+          <strong>Created At: </strong>
+          {createdAt}
+        </p>
+        <p>
+          <strong>Updated At: </strong>
+          {updatedAt}
+        </p>
+        <p>
+          <strong>ID User: </strong>
+          {user}
         </p>
         <hr />
       </Body>

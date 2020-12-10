@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 
 import Dashboard from '../pages/Dashboard';
 import Fetch from '../pages/Fecth';
-import Dados from '../pages/Dados';
 import CatFactsAll from '../pages/CatFactsAll';
 import CatFactsWithID from '../pages/CatFactsWithID';
 

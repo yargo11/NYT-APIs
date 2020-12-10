@@ -3,7 +3,7 @@ import { shade } from 'polished';
 
 export const Header = styled.div`
   width: 100%;
-  background: #d3d3d3;
+  background: #2196f3;
   height: 150px;
   display: flex;
   align-items: center;
@@ -18,6 +18,7 @@ export const Header = styled.div`
       margin-right: 25px;
       border-radius: 50%;
       margin-top: 10px;
+      border: 3px solid #fff;
     }
   }
 `;
@@ -29,11 +30,15 @@ export const Body = styled.div`
   hr {
     margin-bottom: 20px;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const Title = styled.h1`
   font-size: 48px;
-  color: #3a3a3a;
+  color: #fff;
   display: flex;
   align-items: center;
 `;
@@ -55,9 +60,7 @@ export const Form = styled.form`
   /* max-width: 60px; */
 
   display: flex;
-  justify-content:center;
-
-  }
+  justify-content: center;
 
   button {
     padding: 0px 24px;
@@ -73,42 +76,6 @@ export const Form = styled.form`
 
     &:hover {
       background: ${shade(0.2, '#04d361')};
-    }
-  }
-`;
-
-export const Books = styled.div`
-  a {
-    text-decoration: none;
-
-    max-width: 850px;
-    margin: auto;
-
-    padding: 20px 50px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px black;
-
-    color: #fff;
-    background: #a9a9a9;
-
-    display: flex;
-    place-content: space-between;
-
-    transition: transform 0.2s;
-
-    p {
-      align-self: center;
-    }
-    div {
-      width: 33%;
-    }
-
-    &:hover {
-      transform: translateX(10px);
-    }
-
-    & + a {
-      margin-top: 20px;
     }
   }
 `;

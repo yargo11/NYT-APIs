@@ -1,7 +1,6 @@
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { api3 } from '../../services/api';
-import CatIcon from '../../assets/CatIcon.png';
 import tomtom3 from '../../assets/tomtom3.png';
 
 import { Title, Header, Body, Form, CatFact } from './styles';
@@ -15,10 +14,14 @@ interface Fact {
 const Dashboard: React.FC = () => {
   const [cats, setCats] = useState<Fact[]>([]);
 
-  async function randomCatFact(
+  async function addRandomCatFact(
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
+
+    if (cats.length >= 2) {
+      cats.shift();
+    }
 
     const response = await api3.get<Fact>(`/facts/random`);
 
@@ -37,8 +40,8 @@ const Dashboard: React.FC = () => {
       </Header>
       <Body>
         {/* <Form onSubmit={handleSearchBook}> */}
-        <Form onSubmit={randomCatFact}>
-          <button type="submit">Random Cat Fact</button>
+        <Form onSubmit={addRandomCatFact}>
+          <button type="submit">Random Cat Facts</button>
         </Form>
         {/* <Copyright>
           <strong>
@@ -47,14 +50,19 @@ const Dashboard: React.FC = () => {
           <strong>Results Found: 59</strong>
         </Copyright> */}
         <>
-          {cats.map(gatos => (
-            <Link key={gatos._id} to={/catfactswithid}>
-              <CatFact>
-                <p>{gatos.text}</p>
-                <br />
-              </CatFact>
-            </Link>
-          ))}
+          {cats
+            .map(gatos => (
+              <Link
+                key={gatos._id}
+                to={{ pathname: `/catfactswithid/?id=${gatos._id}` }}
+              >
+                <CatFact>
+                  <p>{gatos.text}</p>
+                  <br />
+                </CatFact>
+              </Link>
+            ))
+            .reverse()}
         </>
         <hr />
       </Body>
