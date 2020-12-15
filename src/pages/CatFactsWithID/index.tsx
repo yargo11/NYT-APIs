@@ -9,8 +9,13 @@ interface Fact {
   _id: string;
   createdAt: string;
   updatedAt: string;
-  user: string;
   text: string;
+  user: {
+    name: {
+      first: string;
+      last: string;
+    };
+  };
 }
 
 const CatFactsWithID: React.FC = () => {
@@ -18,9 +23,16 @@ const CatFactsWithID: React.FC = () => {
     _id: '',
     createdAt: '',
     updatedAt: '',
-    user: '',
+    user: {
+      name: {
+        first: '',
+        last: '',
+      },
+    },
     text: '',
   });
+
+  const history = useHistory();
 
   useEffect(() => {
     loadCats();
@@ -37,8 +49,6 @@ const CatFactsWithID: React.FC = () => {
   };
 
   const { text, _id, createdAt, updatedAt, user } = cats;
-
-  const history = useHistory();
 
   function handleClick() {
     history.push('/');
@@ -75,8 +85,10 @@ const CatFactsWithID: React.FC = () => {
           {updatedAt}
         </p>
         <p>
-          <strong>ID User: </strong>
-          {user}
+          <strong>User Name: </strong>
+          {user.name.first}
+          {'  '}
+          {user.name.last}
         </p>
         <hr />
       </Body>

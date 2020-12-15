@@ -45,17 +45,6 @@ export const Title = styled.h1`
   align-items: center;
 `;
 
-export const Copyright = styled.div`
-  max-width: 850px;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 5px;
-  color: darkgray;
-
-  display: flex;
-  place-content: space-between;
-`;
-
 export const Form = styled.form`
   margin-top: 70px;
   margin-bottom: 50px;

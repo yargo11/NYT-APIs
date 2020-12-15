@@ -27,6 +27,14 @@ export const Body = styled.div`
   max-width: 960px;
   margin: auto;
 
+  div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: space-evenly;
+  }
+
   hr {
     margin-bottom: 20px;
   }
@@ -78,6 +86,23 @@ export const Form = styled.form`
       background: ${shade(0.2, '#04d361')};
     }
   }
+
+  input {
+    padding: 10px;
+    flex: 1;
+    height: 50px;
+    border: 0;
+    border-radius: 5px 0 0 5px;
+    color: #3a3a3a;
+
+    &::placeholder {
+      color: #a8a8b3;
+    }
+  }
+
+  input + button {
+    border-radius: 0px 5px 5px 0px;
+  }
 `;
 
 export const CatFact = styled.div`
@@ -85,13 +110,20 @@ export const CatFact = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff;
 
-  background: #d3d3d3;
+  background: #70b7f0;
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
 
+  transition: transform 0.2s;
+
   p {
     text-align: center;
+  }
+
+  &:hover {
+    transform: translateX(10px);
   }
 `;

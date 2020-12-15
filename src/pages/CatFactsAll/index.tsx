@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import { api3 } from '../../services/api';
 import CatIcon from '../../assets/CatIcon.png';
 
-import { Title, Header, Body, Form, Copyright } from './styles';
+import { Title, Header, Body, Form, CatFact } from './styles';
 
 interface Fact {
   _id: string;
-  _v: string;
   text: string;
 }
 
 const CatFactsAll: React.FC = () => {
   const [cats, setCats] = useState<Fact[]>([]);
-  const allCatsId = [''];
+  const history = useHistory();
 
   useEffect(() => {
     loadCats();
@@ -21,12 +21,12 @@ const CatFactsAll: React.FC = () => {
   const loadCats = async () => {
     const response = await api3.get('/facts');
 
-    setCats(response.data.all);
+    setCats(response.data);
   };
 
-  cats.map(gatos => allCatsId.push(gatos._id));
-
-  // console.log(allCatsId);
+  function handleClick() {
+    history.push('/');
+  }
 
   return (
     <>
@@ -37,30 +37,26 @@ const CatFactsAll: React.FC = () => {
         </div>
       </Header>
       <Body>
-        {/* <Form onSubmit={handleSearchBook}> */}
         <Form>
-          <input
-            // value={searchBook}
-            // onChange={e => setSearchBook(e.target.value)}
-            placeholder="Pesquise aqui pelo livro"
-          />
-          <button type="submit">Pesquisar</button>
+          <button type="button" onClick={handleClick}>
+            Voltar
+          </button>
         </Form>
-        <Copyright>
-          <strong>
-            Using a combination of Node.js, Angular, and Tasker, this app will
-            combine APIs and Services from the web to do just one thing… send
-            cat facts.
-          </strong>
-        </Copyright>
-        {cats.map(gatos => (
-          <div key={gatos._id}>
-            <p>{gatos._id}</p>
-            <br />
-          </div>
-        ))}
-
-        {/* {greet(cats)} */}
+        <>
+          {cats
+            .map(gatos => (
+              <Link
+                key={gatos._id}
+                to={{ pathname: `/catfactswithid/?id=${gatos._id}` }}
+              >
+                <CatFact>
+                  <p>{gatos.text}</p>
+                  <br />
+                </CatFact>
+              </Link>
+            ))
+            .reverse()}
+        </>
         <hr />
       </Body>
     </>

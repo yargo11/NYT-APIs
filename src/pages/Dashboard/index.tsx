@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { api3 } from '../../services/api';
 import tomtom3 from '../../assets/tomtom3.png';
 
@@ -13,13 +13,16 @@ interface Fact {
 
 const Dashboard: React.FC = () => {
   const [cats, setCats] = useState<Fact[]>([]);
+  const [searchFacts, setSearchFacts] = useState();
+
+  const history = useHistory();
 
   async function addRandomCatFact(
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
 
-    if (cats.length >= 2) {
+    if (cats.length >= 5) {
       cats.shift();
     }
 
@@ -39,16 +42,30 @@ const Dashboard: React.FC = () => {
         </div>
       </Header>
       <Body>
-        {/* <Form onSubmit={handleSearchBook}> */}
-        <Form onSubmit={addRandomCatFact}>
-          <button type="submit">Random Cat Facts</button>
-        </Form>
-        {/* <Copyright>
-          <strong>
-            Copyright (c) 2020 The New York Times Company. All Rights Reserved.
-          </strong>
-          <strong>Results Found: 59</strong>
-        </Copyright> */}
+        <div>
+          {/* <Form onSubmit={handleSearchBook}> */}
+          <Form>
+            <button
+              onClick={() => {
+                history.push(`/catfactsall`);
+              }}
+              type="submit"
+            >
+              See All Cat Facts
+            </button>
+          </Form>
+          <Form onSubmit={addRandomCatFact}>
+            <button type="submit">Random Cat Facts</button>
+          </Form>
+          <Form onSubmit={addRandomCatFact}>
+            <input
+              // value={searchBook}
+              // onChange={e => setSearchBook(e.target.value)}
+              placeholder="Fact between 1 and 300"
+            />
+            <button type="submit">Specific Cat Facts</button>
+          </Form>
+        </div>
         <>
           {cats
             .map(gatos => (
